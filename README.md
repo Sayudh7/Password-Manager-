@@ -24,10 +24,6 @@ A simple terminal-based password manager written in Python. Store, retrieve, and
 
 ### 1. Clone or download the script
 
-```bash
-git clone https://github.com/yourusername/password-manager.git
-cd password-manager
-```
 
 ### 2. Run the script
 
