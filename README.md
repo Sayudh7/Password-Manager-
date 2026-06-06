@@ -79,11 +79,11 @@ All credentials are saved locally in a `passwords.json` file in the same directo
 > ⚠️ **Security Notice:** Passwords are stored in **plain text**. Do not use this tool for highly sensitive credentials without adding encryption. Avoid committing `passwords.json` to version control — add it to your `.gitignore`.
 
 ---
-🔐 Latest Update (Security Upgrade)
+# 🔐 Latest Update (Security Upgrade)
 
 The password manager has been upgraded with a master password authentication system for improved security.
 
-What’s new:
+## What’s new:
 Added master password login before accessing the program
 Master password is securely hashed using SHA-256
 Stored separately in master.json
