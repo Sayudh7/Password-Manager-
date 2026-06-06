@@ -3,9 +3,64 @@ import os
 import random
 import string
 from getpass import getpass
+import hashlib
+import sys
 
 FILE_NAME = "passwords.json"
+MASTER_FILE = "master.json"
 
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+def setup_master_password():
+
+    print("=== First Time Setup ===")
+
+    while True:
+
+        password = getpass("Create Master Password: ")
+        confirm = getpass("Confirm Master Password: ")
+
+        if password == confirm:
+
+            data = {
+                "master_password": hash_password(password)
+            }
+
+            with open(MASTER_FILE, "w") as file:
+                json.dump(data, file)
+
+            print("Master Password Created.\n")
+            break
+
+        else:
+            print("Passwords do not match.\n")
+
+
+def verify_master_password():
+
+    if not os.path.exists(MASTER_FILE):
+        setup_master_password()
+
+    with open(MASTER_FILE, "r") as file:
+        data = json.load(file)
+
+    attempts = 3
+
+    while attempts > 0:
+
+        password = getpass("Enter Master Password: ")
+
+        if hash_password(password) == data["master_password"]:
+            print("Access Granted\n")
+            return
+
+        attempts -= 1
+        print("Wrong Password")
+
+    print("Too many attempts.")
+    sys.exit()
 
 def load_data():
     if os.path.exists(FILE_NAME):
@@ -114,4 +169,5 @@ def menu():
             print("Invalid Option\n")
 
 
+verify_master_password()
 menu()
